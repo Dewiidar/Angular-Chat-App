@@ -1,38 +1,20 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {IContact} from './contact';
+import {ContactService} from './contact.service';
 
 @Component({
     selector: 'app-contact',
     templateUrl: './contact.component.html',
     styleUrls: ['./contact.component.css']
 })
-export class ContactComponent {
-    contacts: IContact[] = [
-        {
-            'avatar': 'https://bootdey.com/img/Content/avatar/avatar1.png',
-            'name': 'John Doe',
-            'messages': ['First Message', 'Previous Message'],
-            'time': '10:20 PM',
-            'status': 'online'
-        },
-        {
-            'avatar': 'https://bootdey.com/img/Content/avatar/avatar2.png',
-            'name': 'Mark Doe',
-            'messages': ['First Message', 'Previous Message'],
-            'time': '10:10 PM',
-            'status': 'offline'
-        },
-        {
-            'avatar': 'https://bootdey.com/img/Content/avatar/avatar3.png',
-            'name': 'Jean Doe',
-            'messages': ['First Message', 'Previous Message'],
-            'time': '10:00 PM',
-            'status': 'online'
-        }
-    ];
-
+export class ContactComponent implements OnInit {
+    contacts: IContact[] = [];
 
     filteredContacts: IContact[];
+
+    constructor(private _contactService: ContactService) {
+        this.contactFilter = '';
+    }
 
     _contactFilter: string;
     get contactFilter() {
@@ -44,11 +26,6 @@ export class ContactComponent {
         this.filteredContacts = this.contactFilter ? this.performFilter(this.contactFilter) : this.contacts;
     }
 
-    constructor() {
-        this.filteredContacts = this.contacts;
-        this.contactFilter = '';
-    }
-
     performFilter(filterBy: string): IContact[] {
         filterBy = filterBy.toLocaleLowerCase();
         return this.contacts.filter(
@@ -56,4 +33,8 @@ export class ContactComponent {
         );
     }
 
+    ngOnInit() {
+        this.contacts = this._contactService.getContacts();
+        this.filteredContacts = this.contacts;
+    }
 }
