@@ -46,11 +46,11 @@
 
                             </div>
                         </div>
-                        <div class="tab-pane fade" id="contacts">Contacts</div>
+                        <div class="tab-pane fade" id="contacts">
+                            All Contacts Section
+                        </div>
                         <div class="tab-pane fade" id="search">
                             <!--contact component-->
-                            <app-search></app-search>
-                            <!--<div>Search : {{message}}</div>-->
                             <app-contact></app-contact>
 
                         </div>
@@ -93,7 +93,16 @@
                         <!--Messages-->
 
                         <!--received message component-->
+<app-received-message></app-received-message>
                         <!--sent message component-->
+                        <app-sent-message></app-sent-message>
+                        <app-sent-message></app-sent-message>
+
+                        <!--received message component-->
+                        <app-received-message></app-received-message>
+                        <!--sent message component-->
+                        <app-sent-message></app-sent-message>
+
 
                     </div>
                 </div>
@@ -104,10 +113,10 @@
                         <fa-icon [icon]="faPaperClip" class="faIcon"></fa-icon>
                     </div>
                     <div class="col-9 col-sm-9 reply-main">
-                        <textarea class="form-control" rows="1" id="comment"></textarea>
+                        <textarea class="form-control" rows="1" id="comment" placeholder="write a message..."></textarea>
                     </div>
                     <div class="col-2 col-sm-2 reply-send">
-                        <button type="button" class="btn btn-success btn-send">Send</button>
+                        <button type="button" class="btn btn-info btn-send">Send</button>
                     </div>
                 </div>
             </div>

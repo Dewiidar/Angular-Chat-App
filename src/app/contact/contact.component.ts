@@ -8,13 +8,9 @@ import {ContactService} from './contact.service';
     styleUrls: ['./contact.component.css']
 })
 export class ContactComponent implements OnInit {
-    contacts: IContact[] = [];
+    contacts: IContact[];
 
     filteredContacts: IContact[];
-
-    constructor(private _contactService: ContactService) {
-        this.contactFilter = '';
-    }
 
     _contactFilter: string;
     get contactFilter() {
@@ -26,6 +22,10 @@ export class ContactComponent implements OnInit {
         this.filteredContacts = this.contactFilter ? this.performFilter(this.contactFilter) : this.contacts;
     }
 
+    constructor(private _contactService: ContactService) {
+        this.contactFilter = '';
+    }
+
     performFilter(filterBy: string): IContact[] {
         filterBy = filterBy.toLocaleLowerCase();
         return this.contacts.filter(
@@ -33,7 +33,7 @@ export class ContactComponent implements OnInit {
         );
     }
 
-    ngOnInit() {
+    ngOnInit(): void {
         this.contacts = this._contactService.getContacts();
         this.filteredContacts = this.contacts;
     }
